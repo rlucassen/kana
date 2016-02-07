@@ -1,0 +1,85 @@
+﻿<div class="orbit" role="region" data-orbit data-use-m-u-i="false">
+  <ul class="orbit-container" tabindex="0">
+    <button class="orbit-previous" aria-label="previous" tabindex="0"><span class="show-for-sr">Previous Slide</span>&#9664;</button>
+    <button class="orbit-next" aria-label="next" tabindex="0"><span class="show-for-sr">Next Slide</span>&#9654;</button>
+    <li class="orbit-slide" data-slide="0">
+      <img class="orbit-image" src="/Content/images/slide-1.jpg" alt="Space">
+    </li>
+    <li class="orbit-slide" data-slide="1">
+      <img class="orbit-image" src="/Content/images/slide-2.jpg" alt="Space">
+    </li>
+    <li class="orbit-slide" data-slide="2">
+      <img class="orbit-image" src="/Content/images/slide-3.jpg" alt="Space">
+    </li>
+  </ul>
+  <div class="title">
+    <h1>Japanese practice sheets</h1>
+    <h2 class="subheader">Generate random practice sheets!</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <div class="row">
+
+      <div class="large-6 columns">
+        <div class="callout text-center">
+          <h3>Hiragana</h3>
+          <p>Download a random default practice sheet to practice translating Hirgana to Romaji and the other way around.</p>
+          <p>
+            <a class="button" href="/hiragana/createsheet">Default Hiragana practice sheet</a>
+          </p>
+          <p>Configure your own practice sheet, choose how you want to practice!</p>
+          <div class="row">
+            <div class="small-8 columns small-offset-2 text-left">
+              <ul>
+                <li>Kana to Romaji, Romaji to Kana or a combination.</li>
+                <li>Create a maximum of 20 pages at once.</li>
+                <li>Configure how much space you need to write your answer.</li>
+                <li>Generate answer sheets to check your answers.</li>
+              </ul>
+            </div>
+          </div>
+          <p>
+            <a class="button" href="/hiragana">Custom Hiragana practice sheet</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="large-6 columns">
+        <div class="callout text-center">
+          <h3>Katakana</h3>
+          <p>Download a random default practice sheet to practice translating Katakana to Romaji and the other way around.</p>
+          <p>
+            <a class="button" href="/katakana/createsheet">Default Katakana practice sheet</a>
+          </p>
+          <p>Configure your own practice sheet, choose how you want to practice!</p>
+          <div class="row">
+            <div class="small-8 columns small-offset-2 text-left">
+              <ul>
+                <li>Kana to Romaji, Romaji to Kana or a combination.</li>
+                <li>Create a maximum of 20 pages at once.</li>
+                <li>Configure how much space you need to write your answer.</li>
+                <li>Generate answer sheets to check your answers.</li>
+              </ul>
+            </div>
+          </div>
+          <p>
+            <a class="button" href="/katakana">Custom Katakana practice sheet</a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="large-12 columns">
+        <div class="callout text-center">
+          <h3>Kanji</h3>
+          <p>For now I am still practicing the Kana's myself, hopefully in the future I will have some time to implement the Kanji.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

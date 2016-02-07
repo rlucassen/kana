@@ -1,0 +1,91 @@
+﻿<link rel="stylesheet" href="${webPath}/content/stylesheets/vendor/foundation.min.css" />
+
+<style>
+   div.page-break {
+     page-break-before: always;
+   }
+
+  h1 {
+    font-size: 3em;
+  }
+
+  .question {
+    display: block;
+    text-align: center;
+    height: 45px;
+  }
+
+  .input {
+    height: 50px;
+    border: 1px solid #ccc;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .romaji {
+    font-size: 1.5em;
+  }
+
+  .kana {
+    font-size: 2em;
+  }
+</style>
+
+
+<% for page in sheet.Pages: %>
+<h1>${kanaType} practice sheet <% if sheet.IncludePageNumbers: %>${page.PageNumber}<% end %></h1>
+<div style="width: 100%;">
+  <div class="row collapse">
+    <div class="large-12 columns">
+      <% for row in page.Rows: %>
+      <div class="row collapse">
+        <% for question in row.Questions: %>
+        <div class="small-${sheet.RowSize} end columns">
+          <% if question.Type == Kana.Model.Enums.QuestionType.Kana.GetHashCode(): %>
+          <span class="question kana">${question.Kana.Html}</span>
+          <% end %>
+          <% if question.Type == Kana.Model.Enums.QuestionType.Romaji.GetHashCode(): %>
+          <span class="question romaji">${question.Kana.Romaji}</span>
+          <% end %>
+          <span class="input" style="width: ${sheet.InputSize}px"></span>
+        </div>
+        <% end %>
+      </div>
+      <hr />
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="page-break"></div>
+<% end %>
+
+<% if sheet.IncludeAnswerSheets: %>
+<% for page in sheet.Pages: %>
+<h1>Kana answer sheet <% if sheet.IncludePageNumbers: %>${page.PageNumber}<% end %></h1>
+<div style="width: 100%;">
+  <div class="row collapse">
+    <div class="large-12 columns">
+      <% for row in page.Rows: %>
+      <div class="row collapse">
+        <% for question in row.Questions: %>
+        <div class="small-${sheet.RowSize} end columns">
+          <% if question.Type == Kana.Model.Enums.QuestionType.Kana.GetHashCode(): %>
+          <span class="question kana">${question.Kana.Html}</span>
+          <span class="input" style="width: ${sheet.AnswerSize}px"><span class="romaji">${question.Kana.Romaji}</span></span>
+          <% end %>
+          <% if question.Type == Kana.Model.Enums.QuestionType.Romaji.GetHashCode(): %>
+          <span class="question romaji">${question.Kana.Romaji}</span>
+          <span class="input" style="width: ${sheet.AnswerSize}px"><span class="kana">${question.Kana.Html}</span></span>
+          <% end %>
+        </div>
+        <% end %>
+      </div>
+      <hr />
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="page-break"></div>
+<% end %>
+<% end %>

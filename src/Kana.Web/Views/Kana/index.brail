@@ -1,0 +1,164 @@
+﻿<div class="callout">
+  <div class="row">
+    <div class="large-12 columns">
+      <h1>Create ${kanaType} practice sheets</h1>
+      <p>If you select nothing, an automatic selection of everything will be made.</p>
+      <form id="kanasheet" action="/${kanaType}/createsheet" method="post">
+
+        <div class="row">
+
+          <div class="large-4 columns">
+            <div class="callout secondary">
+              <h2 class="text-center">Default ${kanaType} <span class="title-link">(<a href="#" data-selectall=".default-kana-groups" data-selectall-name="select all" data-selectall-dename="deselect all"></a>)</span></h2>
+              <% for group in groupedDefaultKana: %>
+              <hr />
+              <div class="row">
+                <div class="small-2 columns">
+                  <input type="checkbox" class="default-kana-groups" name="kanaGroups" value="${group.Key}" />
+                </div>
+                <% for kana in group.Value: %>
+                <div class="small-2 columns end">
+                  <span class="romaji">${kana.Romaji}</span>
+                  <span class="kana">${kana.Html}</span>
+                </div>
+                <% end %>
+              </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="large-4 columns">
+            <div class="callout secondary">
+              <h2 class="text-center">Dakuten ${kanaType} <span class="title-link">(<a href="#" data-selectall=".dakuten-kana-groups" data-selectall-name="select all" data-selectall-dename="deselect all"></a>)</span></h2>
+              <% for group in groupedDakutenKana: %>
+              <hr />
+              <div class="row">
+                <div class="small-2 columns">
+                  <input type="checkbox" class="dakuten-kana-groups" name="kanaGroups" value="${group.Key}" />
+                </div>
+                <% for kana in group.Value: %>
+                <div class="small-2 columns end">
+                  <span class="romaji">${kana.Romaji}</span>
+                  <span class="kana">${kana.Html}</span>
+                </div>
+                <% end %>
+              </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="large-4 columns">
+            <div class="callout secondary">
+              <h2 class="text-center">Combo ${kanaType} <span class="title-link">(<a href="#" data-selectall=".combo-kana-groups" data-selectall-name="select all" data-selectall-dename="deselect all"></a>)</span></h2>
+              <% for group in groupedComboKana: %>
+              <hr />
+              <div class="row">
+                <div class="small-2 columns">
+                  <input type="checkbox" class="combo-kana-groups" name="kanaGroups" value="${group.Key}" />
+                </div>
+                <% for kana in group.Value: %>
+                <div class="small-3 end columns">
+                  <span class="romaji">${kana.Romaji}</span>
+                  <span class="kana">${kana.Html}</span>
+                </div>
+                <% end %>
+              </div>
+              <% end %>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="row">
+          <div class="large-6 columns">
+
+            <div class="row">
+              <div class="large-12 columns">
+                <div class="row">
+                  <div class="large-4 small-6 columns">Number of pages</div>
+                  <div class="large-8 small-6 columns">
+                    <input type="number" name="pages" value="1" min="1" max="20" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="large-12 columns">
+                <div class="row">
+                  <div class="large-4 small-6 columns">Questions on a row</div>
+                  <div class="large-8 small-6 columns">
+                    <input type="hidden" name="questionsOnARow" id="questionsOnARow" value="12" />
+                    <div class="button-group expanded">
+                      <a href="#" class="button secondary" data-value="6" data-insertto="questionsOnARow">6</a>
+                      <a href="#" class="button secondary" data-value="12" data-insertto="questionsOnARow">12</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="large-6 columns">
+
+            <div class="row">
+              <div class="large-12 columns">
+                <div class="row">
+                  <div class="large-4 small-6 columns">Include pagenumbers</div>
+                  <div class="large-8 small-6 columns">
+                    <input type="hidden" name="includePageNumbers" id="includePageNumbers" value="true" />
+                    <div class="button-group expanded">
+                      <a href="#" class="button secondary" data-value="true" data-insertto="includePageNumbers">yes</a>
+                      <a href="#" class="button secondary" data-value="false" data-insertto="includePageNumbers">no</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="large-12 columns">
+                <div class="row">
+                  <div class="large-4 small-6 columns">Include answer sheets</div>
+                  <div class="large-8 small-6 columns">
+                    <input type="hidden" name="includeAnswerSheets" id="includeAnswerSheets" value="false" />
+                    <div class="button-group expanded">
+                      <a href="#" class="button secondary" data-value="true" data-insertto="includeAnswerSheets">yes</a>
+                      <a href="#" class="button secondary" data-value="false" data-insertto="includeAnswerSheets">no</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="large-12 columns">
+            <div class="row">
+              <div class="large-12 small-12 columns">Type of sheet</div>
+              <div class="large-12 small-12 columns">
+                <input type="hidden" name="sheetType" id="sheetType" value="1" />
+                <div class="button-group expanded">
+                  <% for sheetType in sheetTypes: %>
+                  <a href="#" class="button secondary" data-value="${sheetType.value}" data-insertto="sheetType">${sheetType.text}</a>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="large-12 columns text-center">
+            <input class="button large expanded" type="submit" value="Generate" />
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
