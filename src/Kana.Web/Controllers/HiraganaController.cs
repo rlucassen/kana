@@ -6,7 +6,7 @@ namespace Kana.Web.Controllers
 {
     public class HiraganaController : KanaController<HirganaFactory>
     {
-        public HiraganaController(IPdfExportService pdfExportService) : base(pdfExportService, "hiragana")
+        public HiraganaController(IPdfExportService pdfExportService, ICounterService counterService) : base(pdfExportService, counterService, "hiragana")
         {
         }
     }

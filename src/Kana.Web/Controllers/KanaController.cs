@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using Kana.Model.Entities;
@@ -12,12 +13,14 @@ namespace Kana.Web.Controllers
     public class KanaController<THelper> : BaseController where THelper : KanaBaseFactory, new()
     {
         protected readonly IPdfExportService pdfExportService;
+        protected readonly ICounterService counterService;
         protected readonly KanaBaseFactory BaseFactory;
         protected readonly string kanaType;
 
-        public KanaController(IPdfExportService pdfExportService, string kanaType)
+        public KanaController(IPdfExportService pdfExportService, ICounterService counterService, string kanaType)
         {
             this.pdfExportService = pdfExportService;
+            this.counterService = counterService;
             this.kanaType = kanaType;
             this.BaseFactory = new THelper();
         }
@@ -42,12 +45,15 @@ namespace Kana.Web.Controllers
             questionsOnARow = questionsOnARow == 0 ? 12 : questionsOnARow;
 
             var sheet = new Sheet(kanas, pages, questionsOnARow, sheetType, includePageNumbers, includeAnswerSheets);
+            var count = counterService.Increment(kanaType);
 
             var webPath = ConfigurationManager.AppSettings["webPath"];
             var pdf = pdfExportService.ConvertHtmlToPdf("sheet", new Dictionary<string, object>{
                 {"webPath", webPath},
                 {"sheet", sheet},
                 {"kanaType", kanaType.Capitalize() },
+                {"headerLeft", $"#{count}"},
+                {"headerRight", DateTime.Now.ToString("dd MMM yyyy HH:mm")},
                 {"footerLeft", $"Auto generated at: {webPath}"},
                 {"footerRight", "Created by Robin Lucassen" }
             });
@@ -56,8 +62,9 @@ namespace Kana.Web.Controllers
 
             Response.ContentType = "application/pdf";
 
-            Response.AppendHeader("content-disposition", $"attachment; filename={kanaType}.pdf");
+            Response.AppendHeader("content-disposition", $"attachment; filename={kanaType}-{count}.pdf");
             Response.BinaryWrite(pdf);
+
         }
     }
 }

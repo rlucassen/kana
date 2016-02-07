@@ -43,6 +43,8 @@
           <p>
             <a class="button" href="/hiragana">Custom Hiragana practice sheet</a>
           </p>
+          <p>Downloads</p>
+          <div class="stat">${hiraganaCounter.Count}</div>
         </div>
       </div>
 
@@ -67,6 +69,8 @@
           <p>
             <a class="button" href="/katakana">Custom Katakana practice sheet</a>
           </p>
+          <p>Downloads</p>
+          <div class="stat">${katakanaCounter.Count}</div>
         </div>
       </div>
 

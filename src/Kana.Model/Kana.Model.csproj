@@ -42,6 +42,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -50,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Counter.cs" />
     <Compile Include="Entities\Kana.cs" />
     <Compile Include="Entities\Sheet.cs" />
     <Compile Include="Enums\KanaGroup.cs" />
@@ -61,6 +63,7 @@
     <Compile Include="Factories\HirganaFactory.cs" />
     <Compile Include="Helpers\ListHelper.cs" />
     <Compile Include="Factories\KanaBaseFactory.cs" />
+    <Compile Include="Interfaces\Service\ICounterService.cs" />
     <Compile Include="Interfaces\Service\IPdfExportService.cs" />
     <Compile Include="Interfaces\Service\ITemplateParserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

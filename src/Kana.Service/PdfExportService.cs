@@ -26,7 +26,7 @@ namespace Kana.Service
             var arguments = " - - --header-font-name Arial --header-font-size 10 --footer-font-name Arial --footer-font-size 10 -B 20mm -T 15mm -L 15mm -R 15mm --header-spacing 5 --footer-spacing 10 ";
             if (propertyBag.ContainsKey("headerLeft"))
             {
-                arguments += "--header-left " + propertyBag["headerLeft"] + "\" ";
+                arguments += "--header-left \"" + propertyBag["headerLeft"] + "\" ";
             }
             if (propertyBag.ContainsKey("headerRight"))
             {

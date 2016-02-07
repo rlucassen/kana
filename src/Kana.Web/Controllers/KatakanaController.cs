@@ -6,7 +6,7 @@ namespace Kana.Web.Controllers
 {
     public class KatakanaController : KanaController<KatakanaFactory>
     {
-        public KatakanaController(IPdfExportService pdfExportService) : base(pdfExportService, "katakana")
+        public KatakanaController(IPdfExportService pdfExportService, ICounterService counterService) : base(pdfExportService, counterService, "katakana")
         {
         }
     }
