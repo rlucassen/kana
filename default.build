@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+
+
+
+  <PropertyGroup>
+      <ProjectName>Kana</ProjectName>
+      <Configuration>Release</Configuration>
+      <TempDir>Temp</TempDir>
+      <TempBinDir>$(TempDir)\bin\</TempBinDir>
+      <TempViewDir>$(TempDir)\views\</TempViewDir>
+      <TempContentDir>$(TempDir)\content\</TempContentDir>
+      <WebDir>src\Kana.Web</WebDir>
+      <WebViewDir>$(WebDir)\Views</WebViewDir>
+      <WebContentDir>$(WebDir)\Content</WebContentDir>
+      <BinDir>$(WebDir)\bin</BinDir>
+	  <OutputDir>Artifacts</OutputDir>
+	  <MSBuildCommunityTasksPath>.</MSBuildCommunityTasksPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<Binaries  Include="$(BinDir)\**\*.dll"/>
+    <ViewTemplates Include="$(WebViewDir)\**\*.brail; $(WebViewDir)\**\*.brailjs; $(WebViewDir)\**\*.js;"/>
+	<Content Include="$(WebContentDir)\**\*.*"/>
+  </ItemGroup>
+
+  <Target Name="Package" DependsOnTargets="Clean; Build; PostBuild; CopyToTemp; ZipWeb; CleanUp;"/>
+
+  <Target Name="Clean">
+	<RemoveDir Directories="(TempDir)"/>
+	<MSBuild Projects="src/Kana.sln" Targets="Clean"/>
+  </Target>
+
+  <Target Name="Build">
+	  <MSBuild Projects="src/Kana.sln" Targets="Build" />
+  </Target>
+
+  <Target Name="PostBuild">
+    <MakeDir Directories="$(OutputDir); $(TempBinDir)"/>
+  </Target>
+  
+
+  <Target Name="CopyToTemp">
+    <Copy SourceFiles="@(Binaries)" DestinationFiles="@(Binaries ->'$(TempBinDir)\%(RecursiveDir)%(Filename)%(Extension)')"/>
+    <Copy SourceFiles="@(ViewTemplates)" DestinationFiles="@(ViewTemplates ->'$(TempViewDir)\%(RecursiveDir)%(Filename)%(Extension)')"/>
+    <Copy SourceFiles="@(Content)" DestinationFiles="@(Content ->'$(TempContentDir)\%(RecursiveDir)%(Filename)%(Extension)')"/>
+  </Target>
+
+   <Target Name="ZipWeb">
+    <Time Format="yyyy-MM-dd-HH-mm">
+      <Output TaskParameter="FormattedTime" PropertyName="buildDate" />
+    </Time>
+    <CreateProperty Value="Kana.Web.$(buildDate).zip">
+      <Output TaskParameter="Value" PropertyName="ZipFileName" />
+    </CreateProperty>
+    <CreateProperty Value="$(OutputDir)\$(ZipFileName)">
+      <Output TaskParameter="Value" PropertyName="WebZipFileName" />
+    </CreateProperty>
+    <CreateItem Include="$(TempDir)\**\*.*" >
+      <Output ItemName="ZipFiles" TaskParameter="Include"/>
+    </CreateItem>
+    <Zip Files="@(Zipfiles)" ZipFileName="$(WebZipFileName)" ZipLevel="9" Flatten="false" WorkingDirectory="$(TempDir)"/>
+  </Target>
+
+   <Target Name="CleanUp">
+    <Delete Files="$(TempFiles);"/>
+    <RemoveDir Directories="$(TempDir);" />
+  </Target>
+
+	<Import Project="buildtasks\MSBuild.Community.Tasks.Targets" />  
+</Project>

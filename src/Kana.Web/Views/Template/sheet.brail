@@ -29,6 +29,7 @@
 
   .kana {
     font-size: 2em;
+    font-family: 'HonyaJi-Re';
   }
 </style>
 

@@ -52,7 +52,7 @@ namespace Kana.Web.Controllers
                 {"webPath", webPath},
                 {"sheet", sheet},
                 {"kanaType", kanaType.Capitalize() },
-                {"headerLeft", $"#{count}"},
+                {"headerLeft", $"{kanaType} #{count}"},
                 {"headerRight", DateTime.Now.ToString("dd MMM yyyy HH:mm")},
                 {"footerLeft", $"Auto generated at: {webPath}"},
                 {"footerRight", "Created by Robin Lucassen" }
