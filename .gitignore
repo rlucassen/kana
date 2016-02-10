@@ -109,3 +109,5 @@ UpgradeLog*.XML
 
 *.dotSettings
 Artifacts/
+
+src/Kana.Web/counter.json
