@@ -16,6 +16,11 @@ namespace Kana.Service
         {
             this.jsonLocation = jsonLocation;
             jsonSerializer = new JsonSerializer();
+            if (!File.Exists(jsonLocation))
+            {
+                var fileStream = File.Create(jsonLocation);
+                fileStream.Close();
+            }
         }
 
         private List<Counter> GetCounters()
@@ -29,7 +34,7 @@ namespace Kana.Service
 
         private void SetCounters(List<Counter> counters)
         {
-            using (StreamWriter file = File.CreateText(jsonLocation))
+            using (var file = File.CreateText(jsonLocation))
             {
                 jsonSerializer.Serialize(file, counters);
             }
