@@ -63,7 +63,7 @@
 
 <% if sheet.IncludeAnswerSheets: %>
 <% for page in sheet.Pages: %>
-<h1>Kana answer sheet <% if sheet.IncludePageNumbers: %>${page.PageNumber}<% end %></h1>
+<h1>${kanaType} answer sheet <% if sheet.IncludePageNumbers: %>${page.PageNumber}<% end %></h1>
 <div style="width: 100%;">
   <div class="row collapse">
     <div class="large-12 columns">
